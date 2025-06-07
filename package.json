@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
     "@types/mongoose": "^5.11.97",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",

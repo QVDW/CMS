@@ -3,6 +3,9 @@ import connectMongoDB from "../../../../libs/mongodb";
 import User from "../../../../models/user";
 import Item from "../../../../models/item";
 import FAQ from "../../../../models/faq";
+import Client from "../../../../models/client";
+import Project from "../../../../models/project";
+import Hosting from "../../../../models/hosting";
 
 export async function GET() {
     try {
@@ -14,6 +17,16 @@ export async function GET() {
         const activeItems = await Item.countDocuments({ isActive: true });
         
         const faqCount = await FAQ.countDocuments();
+        
+        const totalClients = await Client.countDocuments();
+        const activeClients = await Client.countDocuments({ status: 'Active' });
+        
+        const totalProjects = await Project.countDocuments();
+        const inProgressProjects = await Project.countDocuments({ status: 'In Progress' });
+        const completedProjects = await Project.countDocuments({ status: 'Completed' });
+        
+        const totalHostings = await Hosting.countDocuments();
+        const activeHostings = await Hosting.countDocuments({ status: 'Active' });
         
         const recentUsers = await User.find({})
             .sort({ created_at: -1 })
@@ -31,6 +44,24 @@ export async function GET() {
             .sort({ createdAt: -1 })
             .limit(1)
             .select('question createdAt')
+            .lean();
+            
+        const recentClients = await Client.find({})
+            .sort({ created_at: -1 })
+            .limit(2)
+            .select('company_name created_at')
+            .lean();
+            
+        const recentProjects = await Project.find({})
+            .sort({ created_at: -1 })
+            .limit(2)
+            .select('project_name created_at')
+            .lean();
+            
+        const recentHostings = await Hosting.find({})
+            .sort({ created_at: -1 })
+            .limit(2)
+            .select('domain_name created_at')
             .lean();
             
         const formatTimeAgo = (date) => {
@@ -61,6 +92,24 @@ export async function GET() {
                 action: 'New question added',
                 name: faq.question,
                 time: formatTimeAgo(faq.createdAt)
+            })),
+            ...recentClients.map(client => ({
+                type: 'client',
+                action: 'New client added',
+                name: client.company_name,
+                time: formatTimeAgo(client.created_at)
+            })),
+            ...recentProjects.map(project => ({
+                type: 'project',
+                action: 'New project created',
+                name: project.project_name,
+                time: formatTimeAgo(project.created_at)
+            })),
+            ...recentHostings.map(hosting => ({
+                type: 'hosting',
+                action: 'New hosting added',
+                name: hosting.domain_name,
+                time: formatTimeAgo(hosting.created_at)
             }))
         ].sort((a, b) => {
             if (a.time === 'Just now') return -1;
@@ -73,7 +122,14 @@ export async function GET() {
                 totalUsers: userCount,
                 totalItems,
                 activeItems,
-                totalQuestions: faqCount
+                totalQuestions: faqCount,
+                totalClients,
+                activeClients,
+                totalProjects,
+                inProgressProjects,
+                completedProjects,
+                totalHostings,
+                activeHostings
             },
             recentActivity
         });

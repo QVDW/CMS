@@ -3830,3 +3830,531 @@ footer {
     }
   }
 }
+
+/* ============================== */
+/* Admin View Detail Page Styling */
+/* ============================== */
+
+.adm-form-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  
+  .adm-back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background-color: #e9ecef;
+      color: color.$dark;
+      transform: translateX(-2px);
+    }
+    
+    svg {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .adm-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: color.$dark;
+    
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+    }
+    
+    svg {
+      color: color.$accent;
+    }
+  }
+}
+
+.adm-view-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.adm-view-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: color.$dark;
+    border-bottom: 2px solid #f8f9fa;
+    padding-bottom: 0.75rem;
+    
+    @media (max-width: 768px) {
+      font-size: 1.125rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+  
+  h3 {
+    margin: 0 0 1.25rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: color.$dark;
+    
+    @media (max-width: 768px) {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.adm-view-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
+}
+
+.adm-view-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+  
+  span, p {
+    font-size: 1rem;
+    color: color.$dark;
+    margin: 0;
+    line-height: 1.5;
+    word-break: break-word;
+    
+    &.monospace {
+      font-family: 'Courier New', Courier, monospace;
+      background: #f8f9fa;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #e9ecef;
+      font-size: 0.875rem;
+    }
+    
+    &.password-hidden {
+      font-family: monospace;
+      font-size: 1.25rem;
+      color: #6c757d;
+      letter-spacing: 2px;
+    }
+    
+    &.connection-string {
+      background: #1e1e1e;
+      color: #00ff00;
+      padding: 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+  
+  .adm-link {
+    color: color.$accent;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: darken(color.$accent, 10%);
+      text-decoration: underline;
+    }
+  }
+  
+  a {
+    color: color.$accent;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: darken(color.$accent, 10%);
+      text-decoration: underline;
+    }
+  }
+}
+
+.adm-form-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  
+  .adm-button-primary, .adm-button-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    
+    @media (max-width: 768px) {
+      justify-content: center;
+      padding: 0.875rem 1.5rem;
+    }
+    
+    svg {
+      font-size: 1rem;
+    }
+  }
+  
+  .adm-button-primary {
+    background-color: color.$accent;
+    color: white;
+    
+    &:hover {
+      background-color: darken(color.$accent, 8%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(color.$accent, 0.3);
+    }
+  }
+  
+  .adm-button-secondary {
+    background-color: #6c757d;
+    color: white;
+    
+    &:hover {
+      background-color: darken(#6c757d, 8%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(#6c757d, 0.3);
+    }
+  }
+}
+
+/* Info Group Styling for Legacy Pages */
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  
+  label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+  
+  p, span {
+    font-size: 1rem;
+    color: color.$dark;
+    margin: 0;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  
+  a {
+    color: color.$accent;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: darken(color.$accent, 10%);
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Enhanced Status Indicators */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  .status-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .status-circle {
+    font-size: 0.5rem;
+    
+    &.completed, &.active {
+      color: #28a745;
+    }
+    
+    &.in-progress {
+      color: #ffc107;
+    }
+    
+    &.confirmation-needed {
+      color: #fd7e14;
+    }
+    
+    &.not-started, &.inactive {
+      color: #6c757d;
+    }
+    
+    &.cancelled, &.suspended, &.expired {
+      color: #dc3545;
+    }
+  }
+  
+  .status-text {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+}
+
+/* Enhanced Related Items Sections */
+.related-section {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+  margin-top: 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    border-radius: 8px;
+  }
+  
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    h3 {
+      margin: 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: color.$dark;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      
+      svg {
+        color: color.$accent;
+      }
+    }
+    
+    .section-actions {
+      display: flex;
+      gap: 0.75rem;
+      
+      @media (max-width: 768px) {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  }
+  
+  .no-items {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+    
+    p {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    
+    .adm-button-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: color.$accent;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: darken(color.$accent, 8%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(color.$accent, 0.3);
+      }
+    }
+  }
+}
+
+/* Loading States */
+.loading-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  color: #6c757d;
+  font-size: 0.95rem;
+  
+  &::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e9ecef;
+    border-top: 2px solid color.$accent;
+    border-radius: 50%;
+    margin-right: 0.75rem;
+    animation: spin 1s linear infinite;
+  }
+}
+
+/* Description Field */
+.adm-view-description {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.5rem;
+  color: color.$dark;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+  }
+}
+
+/* View Actions (alternative to form actions) */
+.adm-view-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  
+  .adm-button-primary, .adm-button-secondary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    
+    @media (max-width: 768px) {
+      justify-content: center;
+      padding: 0.875rem 1.5rem;
+    }
+    
+    svg {
+      font-size: 1rem;
+    }
+  }
+  
+  .adm-button-primary {
+    background-color: color.$accent;
+    color: white;
+    
+    &:hover {
+      background-color: darken(color.$accent, 8%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(color.$accent, 0.3);
+    }
+  }
+  
+  .adm-button-secondary {
+    background-color: #6c757d;
+    color: white;
+    
+    &:hover {
+      background-color: darken(#6c757d, 8%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(#6c757d, 0.3);
+    }
+  }
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+  .adm-view-container .adm-view-section h2 {
+    font-size: 1.125rem;
+  }
+  
+  .adm-view-field {
+    label {
+      font-size: 0.8125rem;
+    }
+    
+    span, p {
+      font-size: 0.9375rem;
+    }
+  }
+}

@@ -3,6 +3,10 @@ import { TbUser } from "react-icons/tb";
 import { TbSettings } from "react-icons/tb";
 import { TbFilterQuestion } from "react-icons/tb";
 import { IoImageOutline } from "react-icons/io5";
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { MdOutlineWork } from "react-icons/md";
+import { HiOutlineUsers } from "react-icons/hi";
+import { HiOutlineServer } from "react-icons/hi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -28,6 +32,22 @@ export default function AdmNavbar() {
                 <Link href="/adm/users" className={isActive("/adm/users")}>
                     <TbUser />
                     <span className="tooltip">Users</span>
+                </Link>
+                <Link href="/adm/clients" className={isActive("/adm/clients")}>
+                    <HiOutlineOfficeBuilding />
+                    <span className="tooltip">Clients</span>
+                </Link>
+                <Link href="/adm/projects" className={isActive("/adm/projects")}>
+                    <MdOutlineWork />
+                    <span className="tooltip">Projects</span>
+                </Link>
+                <Link href="/adm/hostings" className={isActive("/adm/hostings")}>
+                    <HiOutlineServer />
+                    <span className="tooltip">Hostings</span>
+                </Link>
+                <Link href="/adm/contacts" className={isActive("/adm/contacts")}>
+                    <HiOutlineUsers />
+                    <span className="tooltip">Contacts</span>
                 </Link>
                 <Link href="/adm/items" className={isActive("/adm/items")}>
                     <IoImageOutline />

@@ -5,6 +5,8 @@ import AuthWrapper from "../../../components/adm/AuthWrapper";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { IoMdPerson, IoMdImages, IoMdHelp, IoMdSettings, IoMdTime, IoMdEye, IoMdRefresh } from "react-icons/io";
+import { HiOutlineOfficeBuilding, HiOutlineServer } from "react-icons/hi";
+import { MdOutlineWork } from "react-icons/md";
 import { FiPlusCircle, FiAlertCircle } from "react-icons/fi";
 import { TbActivityHeartbeat } from "react-icons/tb";
 import { RiAdminLine } from "react-icons/ri";
@@ -15,11 +17,18 @@ interface DashboardStats {
     totalItems: number;
     activeItems: number;
     totalQuestions: number;
+    totalClients: number;
+    activeClients: number;
+    totalProjects: number;
+    inProgressProjects: number;
+    completedProjects: number;
+    totalHostings: number;
+    activeHostings: number;
 }
 
 interface Activity {
     id?: number;
-    type: 'user' | 'item' | 'question';
+    type: 'user' | 'item' | 'question' | 'client' | 'project' | 'hosting';
     action: string;
     name: string;
     time: string;
@@ -31,7 +40,14 @@ export default function ADM() {
         totalUsers: 0,
         totalItems: 0,
         activeItems: 0,
-        totalQuestions: 0
+        totalQuestions: 0,
+        totalClients: 0,
+        activeClients: 0,
+        totalProjects: 0,
+        inProgressProjects: 0,
+        completedProjects: 0,
+        totalHostings: 0,
+        activeHostings: 0
     });
     
     const [recentActivity, setRecentActivity] = useState<Activity[]>([]);
@@ -179,6 +195,93 @@ export default function ADM() {
                                 </div>
                                 
                                 <div className="stat-card">
+                                    <div className="stat-icon clients">
+                                        <HiOutlineOfficeBuilding />
+                                    </div>
+                                    <div className="stat-details">
+                                        <h3>Total Clients</h3>
+                                        {isLoading ? (
+                                            <div className="skeleton-loader"></div>
+                                        ) : (
+                                            <>
+                                                <p className="stat-value">{stats.totalClients.toLocaleString()}</p>
+                                                <div className="stat-progress">
+                                                    <div className="progress-bar">
+                                                        <div 
+                                                            className="progress-fill" 
+                                                            style={{ width: `${stats.totalClients ? (stats.activeClients / stats.totalClients) * 100 : 0}%` }}
+                                                        ></div>
+                                                    </div>
+                                                    <p className="stat-meta">
+                                                        <span className="highlight">{stats.activeClients}</span> active 
+                                                        ({stats.totalClients ? Math.round((stats.activeClients / stats.totalClients) * 100) : 0}%)
+                                                    </p>
+                                                </div>
+                                            </>
+                                        )}
+                                        <Link href="/adm/clients" className="stat-link">View Details</Link>
+                                    </div>
+                                </div>
+                                
+                                <div className="stat-card">
+                                    <div className="stat-icon projects">
+                                        <MdOutlineWork />
+                                    </div>
+                                    <div className="stat-details">
+                                        <h3>Total Projects</h3>
+                                        {isLoading ? (
+                                            <div className="skeleton-loader"></div>
+                                        ) : (
+                                            <>
+                                                <p className="stat-value">{stats.totalProjects.toLocaleString()}</p>
+                                                <div className="stat-progress">
+                                                    <div className="progress-bar">
+                                                        <div 
+                                                            className="progress-fill" 
+                                                            style={{ width: `${stats.totalProjects ? (stats.completedProjects / stats.totalProjects) * 100 : 0}%` }}
+                                                        ></div>
+                                                    </div>
+                                                    <p className="stat-meta">
+                                                        <span className="highlight">{stats.completedProjects}</span> completed, 
+                                                        <span className="highlight">{stats.inProgressProjects}</span> in progress
+                                                    </p>
+                                                </div>
+                                            </>
+                                        )}
+                                        <Link href="/adm/projects" className="stat-link">View Details</Link>
+                                    </div>
+                                </div>
+                                
+                                <div className="stat-card">
+                                    <div className="stat-icon hostings">
+                                        <HiOutlineServer />
+                                    </div>
+                                    <div className="stat-details">
+                                        <h3>Total Hostings</h3>
+                                        {isLoading ? (
+                                            <div className="skeleton-loader"></div>
+                                        ) : (
+                                            <>
+                                                <p className="stat-value">{stats.totalHostings.toLocaleString()}</p>
+                                                <div className="stat-progress">
+                                                    <div className="progress-bar">
+                                                        <div 
+                                                            className="progress-fill" 
+                                                            style={{ width: `${stats.totalHostings ? (stats.activeHostings / stats.totalHostings) * 100 : 0}%` }}
+                                                        ></div>
+                                                    </div>
+                                                    <p className="stat-meta">
+                                                        <span className="highlight">{stats.activeHostings}</span> active 
+                                                        ({stats.totalHostings ? Math.round((stats.activeHostings / stats.totalHostings) * 100) : 0}%)
+                                                    </p>
+                                                </div>
+                                            </>
+                                        )}
+                                        <Link href="/adm/hostings" className="stat-link">View Details</Link>
+                                    </div>
+                                </div>
+                                
+                                <div className="stat-card">
                                     <div className="stat-icon settings">
                                         <IoMdSettings />
                                     </div>
@@ -210,6 +313,9 @@ export default function ADM() {
                                                     {activity.type === 'user' && <IoMdPerson />}
                                                     {activity.type === 'item' && <IoMdImages />}
                                                     {activity.type === 'question' && <IoMdHelp />}
+                                                    {activity.type === 'client' && <HiOutlineOfficeBuilding />}
+                                                    {activity.type === 'project' && <MdOutlineWork />}
+                                                    {activity.type === 'hosting' && <HiOutlineServer />}
                                                 </div>
                                                 <div className="activity-details">
                                                     <h4>{activity.action}</h4>
@@ -239,6 +345,27 @@ export default function ADM() {
                                             <FiPlusCircle />
                                         </div>
                                         <span>Add User</span>
+                                    </Link>
+                                    
+                                    <Link href="/adm/clients/add" className="action-card">
+                                        <div className="action-icon">
+                                            <FiPlusCircle />
+                                        </div>
+                                        <span>Add Client</span>
+                                    </Link>
+                                    
+                                    <Link href="/adm/projects/add" className="action-card">
+                                        <div className="action-icon">
+                                            <FiPlusCircle />
+                                        </div>
+                                        <span>Add Project</span>
+                                    </Link>
+                                    
+                                    <Link href="/adm/hostings/add" className="action-card">
+                                        <div className="action-icon">
+                                            <FiPlusCircle />
+                                        </div>
+                                        <span>Add Hosting</span>
                                     </Link>
                                     
                                     <Link href="/adm/items/add-item" className="action-card">
