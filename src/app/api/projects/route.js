@@ -64,7 +64,8 @@ export async function POST(request) {
             client_id,
             project_name,
             project_description: project_description || "",
-            status: status || "Not Started"
+            status: status || "Not Started",
+            board_active: true  // Default new projects to be active on the board
         };
 
         console.log("Attempting to create project with data:", projectData);
@@ -100,18 +101,35 @@ export async function GET(request) {
         if (client_id) {
             query.client_id = client_id;
         }
+        
+        // Check if this is a board request (only show board_active projects for board)
+        const isBoard = searchParams.get('board') === 'true';
+        if (isBoard) {
+            // For board requests, show projects that are either explicitly active or don't have the field set (default to active)
+            query.$or = [
+                { board_active: true },
+                { board_active: { $exists: false } }
+            ];
+        }
 
         const projects = await Project.find(query).sort({
             project_name: sortOrder,
             created_at: sortOrder
         });
 
-        // Populate with client information
+        // Populate with client information and ensure board_active is set
         const projectsWithClients = await Promise.all(
             projects.map(async (project) => {
                 const client = await Client.findOne({ client_id: project.client_id });
+                const projectObj = project.toObject();
+                
+                // Ensure board_active is set (default to true for existing projects)
+                if (projectObj.board_active === undefined) {
+                    projectObj.board_active = true;
+                }
+                
                 return {
-                    ...project.toObject(),
+                    ...projectObj,
                     client: client ? {
                         client_id: client.client_id,
                         company_name: client.company_name,

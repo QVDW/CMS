@@ -25,6 +25,10 @@ const projectSchema = new mongoose.Schema({
         enum: ['Not Started', 'In Progress', 'Confirmation Needed', 'Completed'],
         default: 'Not Started',
     },
+    board_active: {
+        type: Boolean,
+        default: true,
+    },
     created_at: {
         type: Date,
         default: Date.now,

@@ -10,7 +10,9 @@ import {
     HiOutlineSearch,
     HiOutlinePencil,
     HiOutlineTrash,
-    HiOutlineEye
+    HiOutlineEye,
+    HiOutlineViewGrid,
+    HiOutlineViewGridAdd
 } from "react-icons/hi";
 import { FaCircle } from "react-icons/fa";
 
@@ -21,6 +23,7 @@ interface Project {
     project_name: string;
     project_description: string;
     status: 'Not Started' | 'In Progress' | 'Confirmation Needed' | 'Completed';
+    board_active: boolean;
     created_at: string;
     updated_at: string;
     client?: {
@@ -90,6 +93,38 @@ export default function ProjectsPage() {
             await fetchProjects();
         } catch (err) {
             alert("Failed to delete project");
+            console.error(err);
+        }
+    };
+
+    const toggleBoardStatus = async (projectId: string, currentStatus: boolean, projectName: string) => {
+        const action = currentStatus ? 'remove from' : 'add to';
+        if (!confirm(`Are you sure you want to ${action} "${projectName}" ${currentStatus ? 'from' : 'to'} the board?`)) return;
+
+        try {
+            const response = await fetch('/api/board', {
+                method: currentStatus ? 'DELETE' : 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: currentStatus 
+                    ? undefined 
+                    : JSON.stringify({ projectId }),
+            });
+
+            if (currentStatus) {
+                // For DELETE, add projectId as query param
+                const deleteResponse = await fetch(`/api/board?projectId=${projectId}`, {
+                    method: 'DELETE',
+                });
+                if (!deleteResponse.ok) throw new Error(`Failed to ${action} board`);
+            } else {
+                if (!response.ok) throw new Error(`Failed to ${action} board`);
+            }
+
+            await fetchProjects();
+        } catch (err) {
+            alert(`Failed to ${action} board`);
             console.error(err);
         }
     };
@@ -182,6 +217,12 @@ export default function ProjectsPage() {
                                                     <span className="status-label">Created:</span>
                                                     <span className="status-text">{formatDate(project.created_at)}</span>
                                                 </div>
+                                                <div className="status-indicator">
+                                                    <span className="status-label">Board:</span>
+                                                    <span className={`board-status ${project.board_active ? 'active' : 'inactive'}`}>
+                                                        {project.board_active ? 'Active' : 'Inactive'}
+                                                    </span>
+                                                </div>
                                             </div>
                                             <div className="adm-item-actions">
                                                 <Link href={`/adm/projects/${project._id}`} title="View Details">
@@ -190,6 +231,13 @@ export default function ProjectsPage() {
                                                 <Link href={`/adm/projects/${project._id}/edit`} title="Edit Project">
                                                     <HiOutlinePencil />
                                                 </Link>
+                                                <button
+                                                    onClick={() => toggleBoardStatus(project._id, project.board_active, project.project_name)}
+                                                    title={project.board_active ? "Remove from Board" : "Add to Board"}
+                                                    className={`board-toggle-btn ${project.board_active ? 'remove' : 'add'}`}
+                                                >
+                                                    {project.board_active ? <HiOutlineViewGrid /> : <HiOutlineViewGridAdd />}
+                                                </button>
                                                 <button
                                                     onClick={() => deleteProject(project._id, project.project_name)}
                                                     title="Delete Project"

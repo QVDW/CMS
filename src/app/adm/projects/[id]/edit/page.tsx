@@ -21,6 +21,7 @@ interface Project {
     project_name: string;
     project_description: string;
     status: 'Not Started' | 'In Progress' | 'Confirmation Needed' | 'Completed';
+    board_active: boolean;
     created_at: string;
     updated_at: string;
 }
@@ -33,7 +34,8 @@ export default function EditProjectPage() {
         client_id: "",
         project_name: "",
         project_description: "",
-        status: "Not Started" as 'Not Started' | 'In Progress' | 'Confirmation Needed' | 'Completed'
+        status: "Not Started" as 'Not Started' | 'In Progress' | 'Confirmation Needed' | 'Completed',
+        board_active: true
     });
     const [isLoading, setIsLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,7 +64,8 @@ export default function EditProjectPage() {
                 client_id: project.client_id,
                 project_name: project.project_name,
                 project_description: project.project_description,
-                status: project.status
+                status: project.status,
+                board_active: project.board_active ?? true  // Default to true if not set
             });
         } catch (err) {
             setError("Failed to load project");
@@ -84,10 +87,12 @@ export default function EditProjectPage() {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value } = e.target;
+        const { name, value, type } = e.target;
+        const checked = (e.target as HTMLInputElement).checked;
+        
         setFormData(prev => ({
             ...prev,
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         }));
     };
 
@@ -226,6 +231,26 @@ export default function EditProjectPage() {
                                 <option value="Confirmation Needed">Confirmation Needed</option>
                                 <option value="Completed">Completed</option>
                             </select>
+                        </div>
+
+                        <div className="adm-form-group">
+                            <div className="adm-checkbox-group">
+                                <input
+                                    type="checkbox"
+                                    id="board_active"
+                                    name="board_active"
+                                    checked={formData.board_active}
+                                    onChange={handleChange}
+                                    className="adm-checkbox"
+                                />
+                                <label htmlFor="board_active" className="adm-checkbox-label">
+                                    <span className="checkbox-indicator"></span>
+                                    <span className="checkbox-text">
+                                        <strong>Active on Project Board</strong>
+                                        <small>When enabled, this project will appear on the project board for drag-and-drop management.</small>
+                                    </span>
+                                </label>
+                            </div>
                         </div>
 
                         <div className="adm-form-actions">

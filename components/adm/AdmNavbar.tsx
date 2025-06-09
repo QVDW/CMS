@@ -7,6 +7,7 @@ import { HiOutlineOfficeBuilding } from "react-icons/hi";
 import { MdOutlineWork } from "react-icons/md";
 import { HiOutlineUsers } from "react-icons/hi";
 import { HiOutlineServer } from "react-icons/hi";
+import { HiOutlineViewGrid } from "react-icons/hi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -40,6 +41,10 @@ export default function AdmNavbar() {
                 <Link href="/adm/projects" className={isActive("/adm/projects")}>
                     <MdOutlineWork />
                     <span className="tooltip">Projects</span>
+                </Link>
+                <Link href="/adm/board" className={isActive("/adm/board")}>
+                    <HiOutlineViewGrid />
+                    <span className="tooltip">Project Board</span>
                 </Link>
                 <Link href="/adm/hostings" className={isActive("/adm/hostings")}>
                     <HiOutlineServer />
