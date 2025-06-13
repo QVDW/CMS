@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Collab Index",
-  description: "CollabIndex is het ultieme platform voor het ontdekken van merk-samenwerkingen. We bieden een zorgvuldig samengestelde index van de nieuwste partnerschappen tussen merken, waarmee gebruikers eenvoudig kunnen verkennen en shoppen tussen de verschillende merken.",
+  title: "VDW Digital",
+  description: "VDW Digital is een bedrijf dat websites maakt voor bedrijven en organisaties. Wij regelen jouw website van A tot Z.",
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

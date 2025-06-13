@@ -157,48 +157,4 @@
   color: #666;
 }
 
-/* Desktop Navigation Menu Styles */
-.desktop-menu {
-  display: flex;
-  align-items: center;
-}
-
-.desktop-menu ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.desktop-menu li {
-  margin: 0 15px;
-}
-
-.desktop-menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: color 0.3s;
-  position: relative;
-}
-
-.desktop-menu a:hover {
-  color: #4a90e2;
-}
-
-/* Underline effect for desktop menu links */
-.desktop-menu a::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -5px;
-  left: 0;
-  background-color: #4a90e2;
-  transition: width 0.3s;
-}
-
-.desktop-menu a:hover::after {
-  width: 100%;
-} 
+/* Desktop Navigation Menu Styles - Moved to SCSS */ 

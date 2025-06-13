@@ -85,10 +85,43 @@
 }
 
 header {
-    background-color: color.$dark;
     height: 70px;
     color: color.$light;
-    position: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(0px);
+    
+    &.scrolled {
+      background: color.$background;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      
+      nav {
+        #nav-logo {
+          filter: invert(0);
+        }
+        
+        #nav-menu svg {
+          color: color.$dark;
+        }
+        
+        .desktop-menu {
+          color: color.$dark;
+          
+          ul li a {
+            color: color.$dark;
+            
+            &:hover {
+              color: rgba(0, 0, 0, 0.7);
+            }
+          }
+        }
+      }
+    }
 
   nav {
     padding: 0 1rem;
@@ -96,10 +129,12 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
     #nav-logo {
-      width: 100px;
-      filter:invert(1);
+      width: 120px;
+      filter: invert(1);
+      transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     #nav-menu{
@@ -111,26 +146,59 @@ header {
         border: none;
         color: #fff;
         z-index: 1;
+        transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
     }
     
-    .desktop-menu ul{
-      display: flex;
+    .desktop-menu {
+      transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      ul{
+        display: flex;
 
-      li{
-        margin-left: 2rem;
+        li{
+          margin-left: 2rem;
+          
+          a {
+            color: color.$light;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            &:hover {
+              color: rgba(255, 255, 255, 0.8);
+            }
+          }
+        }
       }
     }
   }
 
   @media screen and (max-width: 800px) {
-    background: linear-gradient(0deg, #00000000, #000000ce);
+    background: transparent !important;
     height: 150px;
     width: 100vw;
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
-    z-index: 1000; 
+    z-index: 1000;
+    
+    &.scrolled {
+      background: rgba(255, 255, 255, 0.95) !important;
+      height: 70px;
+      
+      nav {
+        color: color.$dark;
+        
+        #nav-logo {
+          filter: invert(0);
+        }
+        
+        #nav-menu svg {
+          color: color.$dark;
+        }
+      }
+    }
 
     nav{
       display: flex;
@@ -141,9 +209,11 @@ header {
       color: #fff;
       padding: 0;
       margin: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
       #nav-logo {
         width: 100px;
+        transition: filter 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       }
     }
   }
@@ -4484,6 +4554,40 @@ footer {
   }
 }
 
+.hero-section{
+  height: 100vh;
+  background-image: url('/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+
+  .hero-content{
+    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.35);
+
+    h1{
+      font-size: 4rem;
+      font-weight: 700;
+      color: color.$light;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    p{
+      font-size: 2rem;
+      font-weight: 400;
+      color: color.$light;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+
 #card-swap-container {
   height: 700px;
   position: relative;
@@ -4712,6 +4816,86 @@ footer {
       p{
         font-size: 3rem;
         font-weight: bold;
+      }
+    }
+  }
+}
+
+.info-cards-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: color.$dark;
+  color: color.$light;
+  padding: 20px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1002%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M534.1929529488306 388.8729261308139L651.4572850005471 384.8898534209275 598.6315884738675 296.97313055069964z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M601.0995536790338 197.64454697885063L707.8511699044286 320.44823370432664 830.6548566299047 213.6966174789317 723.9032404045097 90.89293075345572z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M832.476%2c256.769C869.855%2c253.321%2c894.46%2c222.076%2c913.263%2c189.587C932.113%2c157.016%2c950.02%2c118.534%2c931.406%2c85.828C912.666%2c52.901%2c870.362%2c47.751%2c832.476%2c47.642C794.331%2c47.532%2c754.392%2c53.979%2c732.552%2c85.253C707.469%2c121.171%2c698.908%2c169.475%2c720.961%2c207.328C742.899%2c244.984%2c789.079%2c260.773%2c832.476%2c256.769' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M762.0338609970846 491.76011978604345L815.691013405319 577.6295135149588 901.5604071342344 523.9723611067245 847.903254726 438.1029673778091z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1172.81%2c196.983C1222.45%2c198.823%2c1276.787%2c189.765%2c1302.702%2c147.386C1329.448%2c103.648%2c1315.644%2c49.121%2c1290.574%2c4.402C1264.816%2c-41.544%2c1225.442%2c-82.201%2c1172.81%2c-84.308C1116.952%2c-86.545%2c1063.011%2c-55.472%2c1037.494%2c-5.732C1013.749%2c40.553%2c1029.708%2c95.072%2c1058.589%2c138.338C1084.057%2c176.491%2c1126.969%2c195.284%2c1172.81%2c196.983' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M465.87584465166464 573.4846813529632L481.0623685647377 507.7046194092478 374.799013692628 517.8148645114959z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M631.7640767320679 265.08444410602976L721.3813780001818 178.54202224290836 634.8389561370603 88.92472097479447 545.2216548689465 175.4671428379159z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M428.4974725788397 337.7450446241771L455.351160737296 420.39219858189625 511.1446265365588 310.8913564657208z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M8.984%2c539.051C34.773%2c539.549%2c60.196%2c527.663%2c72.706%2c505.106C84.898%2c483.122%2c79.688%2c456.516%2c66.688%2c435.001C54.185%2c414.308%2c33.16%2c399.827%2c8.984%2c399.646C-15.497%2c399.463%2c-37.979%2c412.932%2c-50.233%2c434.127C-62.5%2c455.344%2c-62.659%2c481.382%2c-50.613%2c502.725C-38.357%2c524.441%2c-15.947%2c538.57%2c8.984%2c539.051' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M1136.1134125939132 513.7972634011508L1085.7688705500102 410.575655445986 982.5472625948454 460.920197489889 1032.8918046387485 564.1418054450538z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M559.936%2c220.807C591.096%2c220.644%2c620.562%2c206.32%2c636.909%2c179.792C654.107%2c151.884%2c659.016%2c115.98%2c641.679%2c88.158C625.1%2c61.553%2c591.282%2c55.938%2c559.936%2c56.267C529.329%2c56.588%2c497.436%2c63.95%2c481.113%2c89.843C463.82%2c117.274%2c464.832%2c152.823%2c481.554%2c180.606C497.783%2c207.571%2c528.464%2c220.972%2c559.936%2c220.807' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M1419.4322203792397 209.60646193423653L1361.3765628463007 208.59309666254873 1388.8843437052385 296.1832655978009z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M169.213%2c357.178C209.791%2c354.857%2c245.705%2c332.8%2c266.184%2c297.692C286.834%2c262.291%2c289.825%2c219.355%2c270.772%2c183.07C250.28%2c144.046%2c213.198%2c115.862%2c169.213%2c113.022C119.787%2c109.831%2c67.577%2c125.844%2c42.077%2c168.304C15.962%2c211.789%2c22.587%2c267.928%2c50.911%2c310.007C76.319%2c347.753%2c123.786%2c359.777%2c169.213%2c357.178' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M331.515%2c31.278C350.657%2c31.266%2c368.666%2c20.723%2c377.467%2c3.724C385.673%2c-12.125%2c381.327%2c-30.998%2c371.455%2c-45.866C362.661%2c-59.111%2c347.387%2c-64.584%2c331.515%2c-65.488C313.389%2c-66.52%2c292.885%2c-66.031%2c282.833%2c-50.913C272.001%2c-34.621%2c275.49%2c-13.05%2c285.46%2c3.783C295.226%2c20.271%2c312.352%2c31.29%2c331.515%2c31.278' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M129.41387617494624 504.54264342957094L292.6742571651892 564.1408261256829 268.90761238994514 414.0841366772421z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M230.47284099962056 272.71860871370257L210.51088070114116 359.1833581499842 296.9756301374228 379.1453184484636 316.93759043590217 292.68056901218193z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float3'%3e%3c/path%3e%3cpath d='M667.1860211210949 214.41987856106726L697.4730923766166 335.89468648535507 818.9479003009044 305.6076152298334 788.6608290453827 184.13280730554558z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3cpath d='M365.66%2c471.298C418.069%2c471.402%2c470.58%2c451.074%2c496.895%2c405.751C523.307%2c360.261%2c512.989%2c305.579%2c489.084%2c258.723C462.219%2c206.064%2c424.773%2c149.085%2c365.66%2c148.514C305.982%2c147.938%2c265.054%2c203.083%2c238.036%2c256.298C213.944%2c303.75%2c208.157%2c359.47%2c235.322%2c405.233C261.97%2c450.126%2c313.454%2c471.195%2c365.66%2c471.298' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M1078.8896018055368 251.49945562123435L1221.0563557707442 308.9385526650324 1278.4954528145422 166.77179869982496 1136.3286988493348 109.3327016560269z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float1'%3e%3c/path%3e%3cpath d='M632.301619084817 452.3959474272957L473.7845946987469 449.629022474409 471.0176697458602 608.1460468604791 629.5346941319303 610.9129718133659z' fill='rgba(28%2c 83%2c 142%2c 0.4)' class='triangle-float2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1002'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3cstyle%3e %40keyframes float1 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-10px%2c 0)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float1 %7b animation: float1 5s infinite%3b %7d %40keyframes float2 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(-5px%2c -5px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float2 %7b animation: float2 4s infinite%3b %7d %40keyframes float3 %7b 0%25%7btransform: translate(0%2c 0)%7d 50%25%7btransform: translate(0%2c -10px)%7d 100%25%7btransform: translate(0%2c 0)%7d %7d .triangle-float3 %7b animation: float3 6s infinite%3b %7d %3c/style%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  h1{
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: color.$light;
+    margin-bottom: 1rem;
+  }
+
+  .info-cards-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+  }
+
+  .info-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: color.$light;
+    color: color.$dark;
+    width: 400px;
+    height: 600px;
+    margin: 15px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+
+    &:nth-child(1), &:nth-child(3){
+      background-color: color.$accent-50;
+    }
+
+    &:nth-child(2){
+      background-color: color.$accent-100;
+      transform: scale(1.05);
+    }
+
+    h2{
+      font-size: 2rem;
+      font-weight: 700;
+      color: color.$dark;
+      margin: 2rem 0 1rem 0;
+    }
+    ul{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li{
+        display: flex;
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: color.$dark;
+        margin: 1rem;
+        align-items: center;
+
+        svg{
+          font-size: 1.2rem;
+          margin-right: 1rem;
+          color: color.$accent;
+        }
       }
     }
   }

@@ -12,6 +12,7 @@ interface NavbarProps {
 export default function Navbar({ isMenuOpen, setIsMenuOpen }: NavbarProps) {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const [isMobile, setIsMobile] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -24,6 +25,19 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: NavbarProps) {
     
     return () => {
       window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -42,7 +56,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: NavbarProps) {
   }, [isMenuOpen, setIsMenuOpen]);
 
   return (
-    <header>
+    <header className={isScrolled ? 'scrolled' : ''}>
       <nav>
         <div id="nav-logo">
           <Link href="/">
@@ -59,8 +73,6 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: NavbarProps) {
         {!isMobile && (
           <div className="desktop-menu">
             <ul>
-              <li><Link href="/collabs">Released Collabs</Link></li>
-              <li><Link href="/upcoming-releases">Upcoming Collabs</Link></li>
               <li><Link href="/faq">FAQ</Link></li>
               {/* <li><Link href="/contact">Contact</Link></li> */}
             </ul>
@@ -81,8 +93,6 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: NavbarProps) {
             </div>
             <ul>
               <li><Link href="/">Home</Link></li>
-              <li><Link href="/collabs">Collabs</Link></li>
-              <li><Link href="/upcoming-releases">Upcoming Collabs</Link></li>
               <li><Link href="/faq">FAQ</Link></li>
               {/* <li><Link href="/contact">Contact</Link></li> */}
             </ul>

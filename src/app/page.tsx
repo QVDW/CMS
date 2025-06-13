@@ -6,9 +6,11 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import HeroSection from "../../components/homepage/HeroSection";
 import CardSwapText from '../../components/homepage/CardSwapText';
+import InfoCards from '../../components/homepage/InfoCards';
 import { FaPenSquare, FaAddressBook, FaRegWindowMinimize } from "react-icons/fa";
 import { PiChartLineUpFill, PiBrowsers } from "react-icons/pi"; 
 import { RiCloseLargeFill } from "react-icons/ri";  
+import PreviewSection from '../../components/homepage/PreviewSection';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -79,6 +81,10 @@ export default function Home() {
           </Card>
         </CardSwap>
       </div>
+
+      <InfoCards />
+
+      <PreviewSection />
 
       <Footer />
     </div>
