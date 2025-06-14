@@ -10,7 +10,7 @@ import InfoCards from '../../components/homepage/InfoCards';
 import { FaPenSquare, FaAddressBook, FaRegWindowMinimize } from "react-icons/fa";
 import { PiChartLineUpFill, PiBrowsers } from "react-icons/pi"; 
 import { RiCloseLargeFill } from "react-icons/ri";  
-import PreviewSection from '../../components/homepage/PreviewSection';
+import ContactSection from '../../components/homepage/ContactPreview';
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -84,7 +84,7 @@ export default function Home() {
 
       <InfoCards />
 
-      <PreviewSection />
+      <ContactSection />
 
       <Footer />
     </div>

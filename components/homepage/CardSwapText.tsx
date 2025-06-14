@@ -4,7 +4,7 @@ export default function CardSwapText() {
 
     return (
         <div className="card-swap-text">
-            <h1>Waarom VDW Digital?</h1>
+            <h1>Waarom <span className="logo-font">QYVO?</span></h1>
             <div className="why-us-text">
             <div><AiFillSketchCircle /> <h1 className="why-us-text-title">Iedereen een website!</h1></div>
             <p className="why-us-text-description">Ons doel is om elk bedrijf – groot of klein – te voorzien van een professionele website die vertrouwen uitstraalt en resultaat boekt.</p>

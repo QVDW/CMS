@@ -60,13 +60,7 @@ export default function Navbar({ isMenuOpen, setIsMenuOpen }: NavbarProps) {
       <nav>
         <div id="nav-logo">
           <Link href="/">
-            <Image 
-              src="/Logo.png"
-              alt="Logo"
-              width={150}
-              height={50}
-              priority
-            />
+            <h1 className="logo-font">QYVO</h1>
           </Link>
         </div>
       
