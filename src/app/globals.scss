@@ -71,6 +71,11 @@
     color: color.$text;
     background: color.$background;
     font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  html {
+    scroll-behavior: smooth;
   }
 }
 
@@ -1660,6 +1665,11 @@ footer {
   flex-direction: column;
   max-width: 2000px;
   margin: 0 auto;
+  overflow-x: hidden;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 }
 
 .fixed-nav-buttons {
@@ -4467,13 +4477,59 @@ footer {
       font-weight: 700;
       color: color.$light;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      
+      @media (max-width: 1024px) {
+        font-size: 3.5rem;
+      }
+      
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 2rem;
+      }
     }
     p{
       font-size: 2rem;
       font-weight: 400;
       color: color.$light;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      
+      @media (max-width: 1024px) {
+        font-size: 1.75rem;
+      }
+      
+      @media (max-width: 768px) {
+        font-size: 1.25rem;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 1rem;
+      }
     }
+    
+    @media (max-width: 768px) {
+      padding: 1.5rem;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    min-height: 100vh;
+    height: auto;
+  }
+}
+
+.card-swap-container{
+  @media (max-width: 1500px) {
+    position: absolute;
+    display: none;
   }
 }
 
@@ -4503,19 +4559,28 @@ footer {
     width: 40%;
     margin: 0 5%;
     
+    @media (max-width: 1500px) {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 2rem;
+    }
+    
     @media (max-width: 1024px) {
-      width: 50%;
-      margin: 0 2.5%;
+      padding: 0 1.5rem;
     }
     
     @media (max-width: 768px) {
       width: 90%;
-      margin: 0 5%;
+      margin: 0 5% 2rem 5%;
+      padding: 0 1rem;
     }
     
     @media (max-width: 480px) {
       width: 95%;
-      margin: 0 2.5%;
+      margin: 0 2.5% 1.5rem 2.5%;
+      padding: 0 0.5rem;
     }
     
     h1 {
@@ -4525,9 +4590,12 @@ footer {
       margin-bottom: 2rem;
       text-align: left;
       
+      @media (max-width: 1500px) {
+        text-align: center;
+      }
+      
       @media (max-width: 768px) {
         font-size: 2rem;
-        text-align: center;
         margin-bottom: 1.5rem;
       }
       
@@ -4566,8 +4634,6 @@ footer {
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
       }
-      
-
     
       div{
         display: flex;
@@ -4653,6 +4719,17 @@ footer {
   .card-content {
     text-align: center;
     color: color.$text;
+    
+    @media (max-width: 768px) {
+      width: 90%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    @media (max-width: 480px) {
+      width: 95%;
+      max-width: 350px;
+    }
 
     .card-top{
       display: flex;
@@ -4662,26 +4739,48 @@ footer {
       justify-content: space-between;
       background-color: color.$dark;
       color: color.$light;
+      
+      @media (max-width: 480px) {
+        padding: 0.25rem;
+      }
 
       .card-tab{
         display: flex;
         align-items: center;
         border-radius: 12px 12px 12px 0;
         padding: 5px 10px;
+        
+        @media (max-width: 480px) {
+          padding: 3px 6px;
+        }
 
         svg{
           font-size: 1.2rem;
           margin: 2px;
+          
+          @media (max-width: 480px) {
+            font-size: 1rem;
+            margin: 1px;
+          }
         }
 
         h3{
           font-size: 1rem;
           font-weight: bold;
+          
+          @media (max-width: 480px) {
+            font-size: 0.875rem;
+          }
         }
       }
       .card-tab-icons{
         svg{
           padding: 2px;
+          
+          @media (max-width: 480px) {
+            padding: 1px;
+            font-size: 0.875rem;
+          }
         }
 
         svg:hover{
@@ -4701,10 +4800,29 @@ footer {
       justify-content: center;
       height: 350px;
       padding: 20px;
+      
+      @media (max-width: 768px) {
+        height: 250px;
+        padding: 15px;
+      }
+      
+      @media (max-width: 480px) {
+        height: 200px;
+        padding: 10px;
+      }
     
       p{
         font-size: 3rem;
         font-weight: bold;
+        line-height: 1.2;
+        
+        @media (max-width: 768px) {
+          font-size: 2rem;
+        }
+        
+        @media (max-width: 480px) {
+          font-size: 1.5rem;
+        }
       }
     }
   }
@@ -4728,6 +4846,15 @@ footer {
     font-weight: 700;
     color: color.$light;
     margin-bottom: 1rem;
+    text-align: center;
+    
+    @media (max-width: 768px) {
+      font-size: 2rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.75rem;
+    }
   }
 
   .info-cards-container{
@@ -4735,6 +4862,12 @@ footer {
     align-items: center;
     justify-content: center;
     margin: 1rem;
+    flex-wrap: wrap;
+    
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      gap: 2rem;
+    }
   }
 
   .info-card{
@@ -4752,6 +4885,25 @@ footer {
     overflow: hidden;
     position: relative;
 
+    @media (max-width: 1200px) {
+      width: 90%;
+      max-width: 400px;
+      margin: 0;
+    }
+    
+    @media (max-width: 768px) {
+      width: 95%;
+      height: auto;
+      min-height: 500px;
+      padding: 1rem;
+    }
+    
+    @media (max-width: 480px) {
+      width: 98%;
+      min-height: 450px;
+      padding: 0.75rem;
+    }
+
     &:nth-child(1), &:nth-child(3){
       background-color: color.$accent-50;
     }
@@ -4759,6 +4911,10 @@ footer {
     &:nth-child(2){
       background-color: color.$accent-100;
       transform: scale(1.05);
+      
+      @media (max-width: 1200px) {
+        transform: scale(1);
+      }
     }
 
     h2{
@@ -4766,11 +4922,23 @@ footer {
       font-weight: 700;
       color: color.$dark;
       margin: 2rem 0 1rem 0;
+      text-align: center;
+      
+      @media (max-width: 768px) {
+        font-size: 1.75rem;
+        margin: 1.5rem 0 1rem 0;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 1.5rem;
+        margin: 1rem 0 0.75rem 0;
+      }
     }
     ul{
       list-style: none;
       padding: 0;
       margin: 0;
+      width: 100%;
 
       li{
         display: flex;
@@ -4779,14 +4947,38 @@ footer {
         color: color.$dark;
         margin: 1rem;
         align-items: center;
+        
+        @media (max-width: 768px) {
+          font-size: 1.1rem;
+          margin: 0.75rem;
+        }
+        
+        @media (max-width: 480px) {
+          font-size: 1rem;
+          margin: 0.5rem;
+        }
 
         svg{
           font-size: 1.2rem;
           margin-right: 1rem;
           color: color.$accent;
+          flex-shrink: 0;
+          
+          @media (max-width: 480px) {
+            font-size: 1rem;
+            margin-right: 0.75rem;
+          }
         }
       }
     }
+  }
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1.5rem 0.5rem;
   }
 }
 
@@ -4798,6 +4990,19 @@ footer {
   width: 100%;
   display: flex;
   padding: 4rem 0;
+  
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding: 2rem 0;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1rem 0.5rem;
+  }
 
   .contact-info{
     display: flex;
@@ -4807,14 +5012,48 @@ footer {
     align-items: center;
     gap: 1rem;
     padding: 4rem;
+    
+    @media (max-width: 1024px) {
+      width: 100%;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+      padding: 1.5rem 1rem;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 1rem 0.5rem;
+    }
 
     .contact-info-content{
       width: 60%;
+      
+      @media (max-width: 1024px) {
+        width: 90%;
+      }
+      
+      @media (max-width: 768px) {
+        width: 95%;
+      }
+      
+      @media (max-width: 480px) {
+        width: 100%;
+      }
     }
 
     h1{
       font-size: 3rem;
       font-weight: 600;
+      
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 2rem;
+      }
     }
 
     .contact-text{
@@ -4826,6 +5065,20 @@ footer {
       color: color.$text;
       opacity: 0.8;
       margin-bottom: 1rem;
+      
+      @media (max-width: 1024px) {
+        justify-content: center;
+      }
+      
+      @media (max-width: 768px) {
+        font-size: 1.1rem;
+      }
+      
+      @media (max-width: 480px) {
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+      }
 
       &:nth-child(2){
         margin-bottom: 2rem;
@@ -4844,11 +5097,36 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  
+  @media (max-width: 1024px) {
+    width: 90%;
+    max-width: 600px;
+  }
+  
+  @media (max-width: 768px) {
+    width: 95%;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    width: 98%;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+  }
 
   h1{
     font-size: 2rem;
     font-weight: 600;
     width: 100%;
+    
+    @media (max-width: 768px) {
+      font-size: 1.75rem;
+    }
+    
+    @media (max-width: 480px) {
+      font-size: 1.5rem;
+    }
   }
 
   h2{
@@ -4856,10 +5134,18 @@ footer {
     font-weight: 500;
     margin-bottom: 1rem;
     width: 100%;
+    
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
   }
 
   .form-group-50{
     width: 49%;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+    }
   }
 
   .form-group-100{
