@@ -141,18 +141,21 @@ export default function ContactSection() {
             <h1 className="contact-title">Neem Contact Op</h1>
             <p className="contact-text">
               Heeft u een vraag of bent u geïnteresseerd in samenwerking? 
-              Vul het onderstaande formulier in en wij nemen zo snel mogelijk contact met u op.
+              Vul het formulier in en wij nemen zo snel mogelijk contact met u op.
             </p>
             <p className="contact-text">
               <FaPhone />
               +31 6 12345678
-
+            </p>
+            <p className="contact-text">
               <FaEnvelope />
               contact@qvdw.dev
               </p>
             </div>
           </div>
           <form className="contact-form" onSubmit={handleSubmit}>
+            <h1>Neem Contact Op</h1>
+            <h2>Gegarandeerd reactie binnen 24 uur</h2>
             {submitStatus === 'success' && (
               <div className="submit-status success">
                 <FaCheckCircle style={{ marginRight: '0.5rem' }} />
@@ -253,6 +256,9 @@ export default function ContactSection() {
                 </>
               )}
             </button>
+            <p className="contact-text">
+              Door contact op te nemen met ons, gaat u akkoord met onze <a href="/privacy">privacyverklaring</a>.
+            </p>
           </form>
         </div>
     </section>
